@@ -43,14 +43,14 @@ class ViewManager {
     }
     
     func getFactItem(representedByRowNumber: Int) -> FactItem? {
-        guard let facts = countryFacts?.facts, representedByRowNumber < facts.count else {
+        guard representedByRowNumber < factItems.count else {
             return nil
         }
         return factItems[representedByRowNumber]
     }
     
     func factsCount() -> Int {
-        return countryFacts?.facts?.count ?? 0
+        return factItems.count
     }
 
 }

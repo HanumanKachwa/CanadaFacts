@@ -10,10 +10,19 @@ import XCTest
 @testable import Facts
 
 class FactsTests: XCTestCase {
+    var manager: ViewManager?
     
+    let factTitle = "FactTitle"
+    let factDescription = "FactDescription"
+    let imageHref = "ImageHref"
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.manager = ViewManager()
+
+        let fact1 = FactItem(title: factTitle, description: factDescription, imageHref: imageHref)
+        self.manager?.factItems.append(fact1)
     }
     
     override func tearDown() {
@@ -21,9 +30,13 @@ class FactsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testFacts() {
+        // test fact added count
+        XCTAssert(self.manager?.factsCount() == 1, "Fact added count does not match")
+        
+        XCTAssert(self.manager?.getFactItem(representedByRowNumber: 0) != nil, "Fact should exist")
+        XCTAssert(self.manager?.getFactItem(representedByRowNumber: 1) == nil, "Fact should not exist")
+
     }
     
     func testPerformanceExample() {
